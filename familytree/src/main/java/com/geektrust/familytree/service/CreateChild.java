@@ -11,12 +11,13 @@ public class CreateChild {
 	public static final String PERSON_NOT_FOUND = "PERSON_NOT_FOUND";
 	public static final String CHILD_ADDITION_FAILED = "CHILD_ADDITION_FAILED";
 
-	public static void createChild(String request) {
+	public static String createChild(String request) {
+		String response = null;
 		String[] reqArray = request.split(" ");
 
 		if (reqArray.length != 4) {
-			System.out.println(CHILD_ADDITION_FAILED);
-			return;
+			response = CHILD_ADDITION_FAILED;
+			return response;
 		}
 
 		String motherName = reqArray[1];
@@ -25,29 +26,30 @@ public class CreateChild {
 		if (CreateTheShanFamilyTree.familyTree.containsKey(motherName)) {
 			mother = CreateTheShanFamilyTree.familyTree.get(motherName);
 		} else {
-			System.out.println(PERSON_NOT_FOUND);
-			return;
+			response = PERSON_NOT_FOUND;
+			return response;
 		}
 
 		if (gender(mother.getGender()).equalsIgnoreCase("MALE")) {
-			System.out.println(CHILD_ADDITION_FAILED);
-			return;
+			response = CHILD_ADDITION_FAILED;
+			return response;
 		}
 
 		String childName = reqArray[2];
 		String childGender = reqArray[3];
 
 		if (CreateTheShanFamilyTree.familyTree.containsKey(childName)) {
-			System.out.println(CHILD_ADDITION_FAILED);
-			return;
+			response = CHILD_ADDITION_FAILED;
+			return response;
 		}
 
 		List<Person> children = CreateTheShanFamilyTree.createChildren(childName, gender(childGender),
 				mother.getSpouse().getPersonName(), motherName);
 		if (children.size() == 1) {
-			System.out.println(CHILD_ADDITION_SUCCEEDED);
-			return;
+			response = CHILD_ADDITION_SUCCEEDED;
+			return response;
 		}
+		return response;
 	}
 
 	public static Gender gender(String gen) {

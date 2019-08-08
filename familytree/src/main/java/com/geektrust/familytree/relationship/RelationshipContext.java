@@ -10,12 +10,7 @@ public class RelationshipContext {
 		this.familyRelation = familyRelation;
 	}
 
-	public void getRelation(Person person) {
-		String response = familyRelation.getRelation(person);
-		if (null == response || response.isEmpty()) {
-			System.out.println("NONE");
-		} else {
-			System.out.println(response);
-		}
+	public String getRelation(Person person) {
+		return familyRelation.getRelation(person);
 	}
 }
