@@ -10,7 +10,9 @@ public class ReadInputFile {
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String request = br.readLine();
 			String response = null;
+
 			while (null != request && !request.isEmpty()) {
+
 				if (request.contains("ADD_CHILD")) {
 					response = CreateChild.createChild(request);
 					System.out.println(response);
@@ -18,8 +20,9 @@ public class ReadInputFile {
 					response = GetRelationship.getRelationship(request);
 					System.out.println(response);
 				} else {
-					System.out.println("Invalid Request" + request);
+					System.out.println("INVALID_REQUEST " + request);
 				}
+
 				request = br.readLine();
 			}
 		}

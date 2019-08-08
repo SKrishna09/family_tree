@@ -1,9 +1,9 @@
 package com.geektrust.familytree.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.util.CollectionUtils;
 
@@ -12,7 +12,7 @@ import com.geektrust.familytree.model.Person;
 
 public class CreateTheShanFamilyTree {
 
-	public static HashMap<String, Person> familyTree = new LinkedHashMap<String, Person>();
+	public static Map<String, Person> familyTree = new LinkedHashMap<>();
 
 	public static void createTheShanFamliyTree() {
 		List<String> mc = new ArrayList<>();
@@ -39,7 +39,7 @@ public class CreateTheShanFamilyTree {
 		addMember("Vich", Gender.MALE, "Lika", "King Shan", "Queen Anga", mc, fc);
 		fc.clear();
 		mc.add("Ahit");
-		fc.add("Janki");
+		fc.add("Jnki");
 		addMember("Aras", Gender.MALE, "Chitra", "King Shan", "Queen Anga", mc, fc);
 		mc.clear();
 		fc.clear();
@@ -59,7 +59,7 @@ public class CreateTheShanFamilyTree {
 		mc.clear();
 		mc.add("Kriya");
 		fc.add("Krithi");
-		addMember("Vyas", Gender.MALE, "Karpi", "Satya", "Vyan", mc, fc);
+		addMember("Vyas", Gender.MALE, "Krpi", "Satya", "Vyan", mc, fc);
 		mc.clear();
 		fc.clear();
 		System.out.println(familyTree.keySet());
@@ -88,7 +88,7 @@ public class CreateTheShanFamilyTree {
 		if (null != maleChildren || null != femaleChildren) {
 			String childsFather;
 			String childsMother;
-			if (gender.getGender().equalsIgnoreCase("male")) {
+			if (gender.getGender().equalsIgnoreCase("MALE")) {
 				childsFather = personName;
 				childsMother = spouseName;
 			} else {
@@ -119,11 +119,11 @@ public class CreateTheShanFamilyTree {
 		}
 		return spouse;
 	}
-	
+
 	public static List<Person> createChildren(String children, Gender gender, String father, String mother) {
 		List<String> childrenList = new ArrayList<>();
 		childrenList.add(children);
-		return createChildren(childrenList,gender,father,mother);
+		return createChildren(childrenList, gender, father, mother);
 	}
 
 	public static List<Person> createChildren(List<String> children, Gender gender, String father, String mother) {
@@ -157,7 +157,7 @@ public class CreateTheShanFamilyTree {
 		if (familyTree.containsKey(fatherName)) {
 			father = familyTree.get(fatherName);
 			List<Person> childrens = father.getChildren();
-			if(CollectionUtils.isEmpty(childrens)){
+			if (CollectionUtils.isEmpty(childrens)) {
 				childrens = new ArrayList<>();
 			}
 			childrens.add(child);
@@ -167,7 +167,7 @@ public class CreateTheShanFamilyTree {
 		if (familyTree.containsKey(motherName)) {
 			mother = familyTree.get(motherName);
 			List<Person> childrens = mother.getChildren();
-			if(CollectionUtils.isEmpty(childrens)){
+			if (CollectionUtils.isEmpty(childrens)) {
 				childrens = new ArrayList<>();
 			}
 			childrens.add(child);
@@ -176,10 +176,10 @@ public class CreateTheShanFamilyTree {
 	}
 
 	private static Gender invertedGender(String gender) {
-		Gender invertedGender;
-		if (gender.equalsIgnoreCase("male")) {
+		Gender invertedGender = null;
+		if (gender.equalsIgnoreCase("MALE")) {
 			invertedGender = Gender.FEMALE;
-		} else {
+		} else if (gender.equalsIgnoreCase("FEMALE")) {
 			invertedGender = Gender.MALE;
 		}
 		return invertedGender;

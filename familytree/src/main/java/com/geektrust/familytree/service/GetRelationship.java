@@ -13,33 +13,41 @@ import com.geektrust.familytree.relationship.SisterInLaw;
 import com.geektrust.familytree.relationship.Son;
 
 public class GetRelationship {
+
 	public static final String PERSON_NOT_FOUND = "PERSON_NOT_FOUND";
+	public static final String INVALID_RELATION = "INVALID_RELATION";
 
 	public static String getRelationship(String request) {
 		String response = null;
+
+		// ONLY ACCEPTING FIRST 2 PARAMETERS TO GET RELATIONSHIP
 		String[] reqArray = request.split(" ");
-
-		if (reqArray.length != 3) {
-			response = PERSON_NOT_FOUND;
-			return response;
-		}
-
 		String personName = reqArray[1];
-
-		Person person = null;
-		if (CreateTheShanFamilyTree.familyTree.containsKey(personName)) {
-			person = CreateTheShanFamilyTree.familyTree.get(personName);
-		} else {
-			response = PERSON_NOT_FOUND;
-			return response;
-		}
-
 		String relationshipType = reqArray[2];
 
+		response = validateRequest(personName);
+		if (null != response) {
+			return response;
+		}
+
+		// GET RELATION
+		Person person = CreateTheShanFamilyTree.familyTree.get(personName);
 		response = getRelation(relationshipType, person);
 		if (null == response || response.isEmpty()) {
 			response = "NONE";
 		}
+		return response;
+	}
+
+	public static String validateRequest(String personName) {
+		String response = null;
+
+		// CHECKING FOR EXISTENCE OF PERSON
+		if (!CreateTheShanFamilyTree.familyTree.containsKey(personName)) {
+			response = PERSON_NOT_FOUND;
+			return response;
+		}
+
 		return response;
 	}
 
@@ -51,43 +59,36 @@ public class GetRelationship {
 		switch (relationshipType) {
 		case "paternal-uncle":
 			rsc.setRelation(new PaternalUncle());
-			response = rsc.getRelation(person);
 			break;
 		case "maternal-uncle":
 			rsc.setRelation(new MaternalUncle());
-			response = rsc.getRelation(person);
 			break;
 		case "paternal-aunt":
 			rsc.setRelation(new PaternalAunt());
-			response = rsc.getRelation(person);
 			break;
 		case "maternal-aunt":
 			rsc.setRelation(new MaternalAunt());
-			response = rsc.getRelation(person);
 			break;
 		case "sister-in-law":
 			rsc.setRelation(new SisterInLaw());
-			response = rsc.getRelation(person);
 			break;
 		case "brother-in-law":
 			rsc.setRelation(new BrotherInLaw());
-			response = rsc.getRelation(person);
 			break;
 		case "son":
 			rsc.setRelation(new Son());
-			response = rsc.getRelation(person);
 			break;
 		case "daughter":
 			rsc.setRelation(new Daughter());
-			response = rsc.getRelation(person);
 			break;
 		case "siblings":
 			rsc.setRelation(new Siblings());
-			response = rsc.getRelation(person);
 			break;
 		default:
-			response = PERSON_NOT_FOUND;
+			response = INVALID_RELATION;
+			return response;
 		}
+		response = rsc.getRelation(person);
 		return response;
 	}
 }

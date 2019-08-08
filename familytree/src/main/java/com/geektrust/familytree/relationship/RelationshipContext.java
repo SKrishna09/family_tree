@@ -11,6 +11,6 @@ public class RelationshipContext {
 	}
 
 	public String getRelation(Person person) {
-		return familyRelation.getRelation(person);
+		return familyRelation.getRelation(person).trim();
 	}
 }
