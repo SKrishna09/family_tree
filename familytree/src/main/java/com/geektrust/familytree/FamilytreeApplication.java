@@ -6,9 +6,8 @@ import java.util.Scanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.geektrust.familytree.service.CreateChild;
-import com.geektrust.familytree.service.CreateTheShanFamilyTree;
 import com.geektrust.familytree.service.ReadInputFile;
+import com.geektrust.familytree.service.SeedTheShanFamilyTree;
 
 @SpringBootApplication
 public class FamilytreeApplication {
@@ -17,7 +16,7 @@ public class FamilytreeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FamilytreeApplication.class, args);
 		
-		CreateTheShanFamilyTree.createTheShanFamliyTree();
+		SeedTheShanFamilyTree.seedTheShanFamilyTree();
 		
 		System.out.println("Please Input File Location::");
 		

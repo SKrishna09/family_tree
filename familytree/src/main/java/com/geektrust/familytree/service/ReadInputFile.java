@@ -12,17 +12,14 @@ public class ReadInputFile {
 			String response = null;
 
 			while (null != request && !request.isEmpty()) {
-
 				if (request.contains("ADD_CHILD")) {
 					response = CreateChild.createChild(request);
-					System.out.println(response);
 				} else if (request.contains("GET_RELATIONSHIP")) {
 					response = GetRelationship.getRelationship(request);
-					System.out.println(response);
 				} else {
 					System.out.println("INVALID_REQUEST " + request);
 				}
-
+				System.out.println(response);
 				request = br.readLine();
 			}
 		}

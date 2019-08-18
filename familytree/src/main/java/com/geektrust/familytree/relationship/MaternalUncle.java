@@ -1,32 +1,19 @@
 package com.geektrust.familytree.relationship;
 
-import java.util.List;
-
-import org.springframework.util.CollectionUtils;
-
 import com.geektrust.familytree.model.Person;
+import com.geektrust.familytree.service.FamilyTreeCommonBehaviour;
+import com.geektrust.familytree.utility.FamilyTreeConstants;
 
-public class MaternalUncle implements FamilyRelation{
+public class MaternalUncle implements FamilyRelation {
 
 	@Override
 	public String getRelation(Person person) {
-		StringBuilder maternalUncle = new StringBuilder();
+		String maternalUncle = null;
 		Person mother = person.getMother();
 		if (null != mother) {
-			Person mothersFather = mother.getFather();
-			if (null != mothersFather) {
-				List<Person> children = mothersFather.getChildren();
-				if (!CollectionUtils.isEmpty(children)) {
-					for (Person child : children) {
-						if (child.getGender().getGender().equalsIgnoreCase("MALE")) {
-							maternalUncle.append(child.getPersonName());
-							maternalUncle.append(" ");
-						}
-					}
-				}
-			}
+			maternalUncle = FamilyTreeCommonBehaviour.getPersonsGenderSpecificSiblings(mother,
+					FamilyTreeConstants.MALE);
 		}
-		return maternalUncle.toString();
+		return maternalUncle;
 	}
-
 }

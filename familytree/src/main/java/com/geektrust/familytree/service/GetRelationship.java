@@ -11,11 +11,9 @@ import com.geektrust.familytree.relationship.RelationshipContext;
 import com.geektrust.familytree.relationship.Siblings;
 import com.geektrust.familytree.relationship.SisterInLaw;
 import com.geektrust.familytree.relationship.Son;
+import com.geektrust.familytree.utility.FamilyTreeConstants;
 
 public class GetRelationship {
-
-	public static final String PERSON_NOT_FOUND = "PERSON_NOT_FOUND";
-	public static final String INVALID_RELATION = "INVALID_RELATION";
 
 	public static String getRelationship(String request) {
 		String response = null;
@@ -31,10 +29,10 @@ public class GetRelationship {
 		}
 
 		// GET RELATION
-		Person person = CreateTheShanFamilyTree.familyTree.get(personName);
+		Person person = TheShanFamilyTree.getPersonFromFamilyTreeMap(personName);
 		response = getRelation(relationshipType, person);
 		if (null == response || response.isEmpty()) {
-			response = "NONE";
+			response = FamilyTreeConstants.NONE;
 		}
 		return response;
 	}
@@ -43,8 +41,8 @@ public class GetRelationship {
 		String response = null;
 
 		// CHECKING FOR EXISTENCE OF PERSON
-		if (!CreateTheShanFamilyTree.familyTree.containsKey(personName)) {
-			response = PERSON_NOT_FOUND;
+		if (null == TheShanFamilyTree.getPersonFromFamilyTreeMap(personName)) {
+			response = FamilyTreeConstants.PERSON_NOT_FOUND;
 			return response;
 		}
 
@@ -57,35 +55,35 @@ public class GetRelationship {
 
 		String response = null;
 		switch (relationshipType) {
-		case "paternal-uncle":
+		case FamilyTreeConstants.PATERNAL_UNCLE:
 			rsc.setRelation(new PaternalUncle());
 			break;
-		case "maternal-uncle":
+		case FamilyTreeConstants.MATERNAL_UNCLE:
 			rsc.setRelation(new MaternalUncle());
 			break;
-		case "paternal-aunt":
+		case FamilyTreeConstants.PATERNAL_AUNT:
 			rsc.setRelation(new PaternalAunt());
 			break;
-		case "maternal-aunt":
+		case FamilyTreeConstants.MATERNAL_AUNT:
 			rsc.setRelation(new MaternalAunt());
 			break;
-		case "sister-in-law":
+		case FamilyTreeConstants.SISTER_IN_LAW:
 			rsc.setRelation(new SisterInLaw());
 			break;
-		case "brother-in-law":
+		case FamilyTreeConstants.BROTHER_IN_LAW:
 			rsc.setRelation(new BrotherInLaw());
 			break;
-		case "son":
+		case FamilyTreeConstants.SON:
 			rsc.setRelation(new Son());
 			break;
-		case "daughter":
+		case FamilyTreeConstants.DAUGHTER:
 			rsc.setRelation(new Daughter());
 			break;
-		case "siblings":
+		case FamilyTreeConstants.SIBLINGS:
 			rsc.setRelation(new Siblings());
 			break;
 		default:
-			response = INVALID_RELATION;
+			response = FamilyTreeConstants.INVALID_RELATION;
 			return response;
 		}
 		response = rsc.getRelation(person);
