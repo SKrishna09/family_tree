@@ -59,8 +59,4 @@ public class TheShanFamilyTree {
 			pPerson = familyTree.get(person);
 		return pPerson;
 	}
-
-	public static void familyTree() {
-		System.out.println(familyTree.keySet());
-	}
 }

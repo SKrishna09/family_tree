@@ -12,7 +12,7 @@ import com.geektrust.familytree.service.CreateChild;
 public class TestCreateChild extends FamilytreeApplicationTests{
 
 	@Test
-	public void testCreateChildResult() {
+	public void testCreateChilAdditionSuccess() {
 		String createChild = CreateChild.createChild("ADD_CHILD Chitra Aria Female");
 		assertEquals("Add Child", "CHILD_ADDITION_SUCCEEDED", createChild);
 	}
@@ -39,5 +39,11 @@ public class TestCreateChild extends FamilytreeApplicationTests{
 	public void testCreateChildAlreadyPresent() {
 		String createChild = CreateChild.createChild("ADD_CHILD Krpi Kriya Female");
 		assertEquals("Add Child", "CHILD_ALREADY_PRESENT", createChild);
+	}
+	
+	@Test
+	public void testCreateChildFatherExistence() {
+		String createChild = CreateChild.createChild("ADD_CHILD Tritha Kritha Female");
+		assertEquals("Add Child", "CHILD_ADDITION_FAILED", createChild);
 	}
 }

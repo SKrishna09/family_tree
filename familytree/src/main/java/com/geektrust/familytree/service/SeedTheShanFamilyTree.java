@@ -16,7 +16,6 @@ public class SeedTheShanFamilyTree {
 			Person response = null;
 
 			while (null != seedRequest && !seedRequest.isEmpty()) {
-				System.out.println(seedRequest);
 				String[] request = seedRequest.split(",");
 				
 				if (seedRequest.contains("ADD_MEMBER")) {
@@ -30,7 +29,6 @@ public class SeedTheShanFamilyTree {
 				}
 				seedRequest = br.readLine();
 			}
-			TheShanFamilyTree.familyTree();
 		} catch (FileNotFoundException e) {
 			System.err.println("FileNotFoundException");
 		} catch (IOException e) {

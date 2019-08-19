@@ -37,10 +37,6 @@ public class Person {
 		return children;
 	}
 
-	public Person() {
-
-	}
-
 	public Person(String personName, Gender gender) {
 		this.personName = personName;
 		this.gender = gender;
@@ -62,11 +58,5 @@ public class Person {
 
 	public void addSpouse(Person spouse) {
 		this.spouse = spouse;
-	}
-
-	@Override
-	public String toString() {
-		return "Person [personName=" + personName + ", gender=" + gender + ", spouse=" + spouse + ", father=" + father
-				+ ", mother=" + mother + ", children=" + children + "]";
 	}
 }
